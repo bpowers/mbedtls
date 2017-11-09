@@ -57,14 +57,10 @@ extern "C" {
 
 /**
  * Wrapper type for sockets.
- *
- * Currently backed by just a file descriptor, but might be more in the future
- * (eg two file descriptors for combined IPv4 + IPv6 support, or additional
- * structures for hand-made UDP demultiplexing).
  */
 typedef struct
 {
-    int fd;             /**< The underlying file descriptor                 */
+	unsigned long stream;
 }
 mbedtls_net_context;
 

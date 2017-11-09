@@ -131,7 +131,7 @@ if(USE_STATIC_MBEDTLS_LIBRARY)
 
     add_library(${mbedtls_static_target} STATIC ${src_tls})
     set_target_properties(${mbedtls_static_target} PROPERTIES OUTPUT_NAME mbedtls)
-    target_link_libraries(${mbedtls_static_target} ${libs} ${mbedx509_static_target})
+    target_link_libraries(${mbedtls_static_target} ${libs} ${mbedx509_static_target} MacTCPHelper)
 
     install(TARGETS ${mbedtls_static_target} ${mbedx509_static_target} ${mbedcrypto_static_target}
             DESTINATION ${LIB_INSTALL_DIR}
@@ -149,7 +149,7 @@ if(USE_SHARED_MBEDTLS_LIBRARY)
 
     add_library(mbedtls SHARED ${src_tls})
     set_target_properties(mbedtls PROPERTIES VERSION 2.6.0 SOVERSION 10)
-    target_link_libraries(mbedtls ${libs} mbedx509)
+    target_link_libraries(mbedtls ${libs} mbedx509 MacTCPHelper)
 
     install(TARGETS mbedtls mbedx509 mbedcrypto
             DESTINATION ${LIB_INSTALL_DIR}
