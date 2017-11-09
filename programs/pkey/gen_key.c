@@ -77,7 +77,7 @@ int dev_random_entropy_poll( void *data, unsigned char *output,
 
         p += ret;
         left -= ret;
-        sleep( 1 );
+        //sleep( 1 );
     }
     fclose( file );
     *olen = len;

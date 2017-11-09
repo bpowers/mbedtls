@@ -12,7 +12,7 @@ set(targets
     ssl_client2
     ssl_server
     ssl_fork_server
-    ssl_mail_client
+#    ssl_mail_client
     mini_client
 )
 
@@ -30,7 +30,7 @@ target_link_libraries(dtls_client ${libs})
 add_executable(dtls_server dtls_server.c)
 target_link_libraries(dtls_server ${libs})
 
-add_executable(ssl_client1 ssl_client1.c)
+add_application(ssl_client1 ssl_client1.c CONSOLE)
 target_link_libraries(ssl_client1 ${libs})
 
 add_executable(ssl_client2 ssl_client2.c)
@@ -45,8 +45,9 @@ target_link_libraries(ssl_server2 ${libs})
 add_executable(ssl_fork_server ssl_fork_server.c)
 target_link_libraries(ssl_fork_server ${libs})
 
-add_executable(ssl_mail_client ssl_mail_client.c)
-target_link_libraries(ssl_mail_client ${libs})
+# Disabled dur to compile error
+# add_application(ssl_mail_client ssl_mail_client.c CONSOLE)
+# target_link_libraries(ssl_mail_client ${libs})
 
 add_executable(mini_client mini_client.c)
 target_link_libraries(mini_client ${libs})
