@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.6)
 project("mbed TLS")
 
+# See: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+SET(CMAKE_CXX_FLAGS "-Ofast")
+
 option(USE_PKCS11_HELPER_LIBRARY "Build mbed TLS with the pkcs11-helper library." OFF)
 option(ENABLE_ZLIB_SUPPORT "Build mbed TLS with zlib library." OFF)
 
