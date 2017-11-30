@@ -1821,8 +1821,9 @@
  *      MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA
  *
  * PEM_PARSE uses DES/3DES for decrypting encrypted keys.
- */
+
 #define MBEDTLS_DES_C
+*/
 
 /**
  * \def MBEDTLS_DHM_C
