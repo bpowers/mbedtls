@@ -594,8 +594,9 @@
  *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256
  *      MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA
  *      MBEDTLS_TLS_PSK_WITH_RC4_128_SHA
- */
+
 #define MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+*/
 
 /**
  * \def MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED
@@ -618,8 +619,9 @@
  *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
  *      MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA
  *      MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA
- */
+
 #define MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED
+*/
 
 /**
  * \def MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED
@@ -638,8 +640,9 @@
  *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
  *      MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA
  *      MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA
- */
+
 #define MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED
+*/
 
 /**
  * \def MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED
@@ -663,8 +666,9 @@
  *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256
  *      MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA
  *      MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA
- */
+
 #define MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED
+*/
 
 /**
  * \def MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
@@ -717,8 +721,9 @@
  *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
  *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA
  *      MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
- */
+
 #define MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED
+*/
 
 /**
  * \def MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
@@ -790,8 +795,9 @@
  *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
  *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
  *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
- */
+
 #define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+*/
 
 /**
  * \def MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
@@ -814,8 +820,9 @@
  *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384
  *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256
  *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384
- */
+
 #define MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
+*/
 
 /**
  * \def MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED
@@ -1102,7 +1109,9 @@
  *
  * Comment this macro to disable support for Extended Master Secret.
  */
+
 #define MBEDTLS_SSL_EXTENDED_MASTER_SECRET
+
 
 /**
  * \def MBEDTLS_SSL_FALLBACK_SCSV
@@ -1118,8 +1127,9 @@
  * interoperate with buggy (version-intolerant) servers.
  *
  * Comment this macro to disable support for FALLBACK_SCSV
- */
+
 #define MBEDTLS_SSL_FALLBACK_SCSV
+*/
 
 /**
  * \def MBEDTLS_SSL_HW_RECORD_ACCEL
@@ -1155,8 +1165,9 @@
  * misuse/misunderstand.
  *
  * Comment this to disable support for renegotiation.
- */
+
 #define MBEDTLS_SSL_RENEGOTIATION
+*/
 
 /**
  * \def MBEDTLS_SSL_SRV_SUPPORT_SSLV2_CLIENT_HELLO
@@ -1247,8 +1258,9 @@
  *        or MBEDTLS_SSL_PROTO_TLS1_2
  *
  * Comment this macro to disable support for DTLS
- */
+
 #define MBEDTLS_SSL_PROTO_DTLS
+*/
 
 /**
  * \def MBEDTLS_SSL_ALPN
@@ -1271,8 +1283,9 @@
  * See mbedtls_ssl_conf_dtls_anti_replay() for details.
  *
  * Comment this to disable anti-replay in DTLS.
- */
+
 #define MBEDTLS_SSL_DTLS_ANTI_REPLAY
+*/
 
 /**
  * \def MBEDTLS_SSL_DTLS_HELLO_VERIFY
@@ -1289,8 +1302,9 @@
  * Requires: MBEDTLS_SSL_PROTO_DTLS
  *
  * Comment this to disable support for HelloVerifyRequest.
- */
+
 #define MBEDTLS_SSL_DTLS_HELLO_VERIFY
+*/
 
 /**
  * \def MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE
@@ -1305,8 +1319,9 @@
  * Requires: MBEDTLS_SSL_DTLS_HELLO_VERIFY
  *
  * Comment this to disable support for clients reusing the source port.
- */
+
 #define MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE
+*/
 
 /**
  * \def MBEDTLS_SSL_DTLS_BADMAC_LIMIT
@@ -1316,8 +1331,9 @@
  * See mbedtls_ssl_conf_dtls_badmac_limit().
  *
  * Requires: MBEDTLS_SSL_PROTO_DTLS
- */
+
 #define MBEDTLS_SSL_DTLS_BADMAC_LIMIT
+*/
 
 /**
  * \def MBEDTLS_SSL_SESSION_TICKETS
@@ -1596,8 +1612,9 @@
  *      MBEDTLS_TLS_RSA_WITH_RC4_128_MD5
  *      MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA
  *      MBEDTLS_TLS_PSK_WITH_RC4_128_SHA
- */
+
 #define MBEDTLS_ARC4_C
+*/
 
 /**
  * \def MBEDTLS_ASN1_PARSE_C
@@ -1716,8 +1733,9 @@
  *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384
  *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256
  *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256
- */
+
 #define MBEDTLS_CAMELLIA_C
+*/
 
 /**
  * \def MBEDTLS_CCM_C
@@ -1730,8 +1748,9 @@
  *
  * This module enables the AES-CCM ciphersuites, if other requisites are
  * enabled as well.
- */
+
 #define MBEDTLS_CCM_C
+*/
 
 /**
  * \def MBEDTLS_CERTS_C
@@ -1742,8 +1761,9 @@
  * Caller:
  *
  * This module is used for testing (ssl_client/server).
- */
+
 #define MBEDTLS_CERTS_C
+*/
 
 /**
  * \def MBEDTLS_CIPHER_C
@@ -2321,8 +2341,9 @@
  *          library/ssl_srv.c
  *
  * This module adds support for SHA-384 and SHA-512.
- */
+
 #define MBEDTLS_SHA512_C
+*/
 
 /**
  * \def MBEDTLS_SSL_CACHE_C
@@ -2444,8 +2465,9 @@
  * Caller:  library/havege.c
  *
  * This module is used by the HAVEGE random number generator.
- */
-//#define MBEDTLS_TIMING_C
+
+#define MBEDTLS_TIMING_C
+*/
 
 /**
  * \def MBEDTLS_VERSION_C
