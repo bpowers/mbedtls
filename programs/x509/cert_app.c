@@ -163,7 +163,7 @@ int main( int argc, char *argv[] )
     /*
      * Set to sane values
      */
-    mbedtls_net_init( &server_fd );
+    mbedtls_net_init( &server_fd, NULL);
     mbedtls_ctr_drbg_init( &ctr_drbg );
     mbedtls_ssl_init( &ssl );
     mbedtls_ssl_config_init( &conf );

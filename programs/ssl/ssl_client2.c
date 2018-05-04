@@ -475,7 +475,7 @@ int main( int argc, char *argv[] )
     /*
      * Make sure memory references are valid.
      */
-    mbedtls_net_init( &server_fd );
+    mbedtls_net_init( &server_fd, NULL);
     mbedtls_ssl_init( &ssl );
     mbedtls_ssl_config_init( &conf );
     memset( &saved_session, 0, sizeof( mbedtls_ssl_session ) );

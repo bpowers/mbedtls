@@ -34,6 +34,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <MacTCP.h>#include <mactcp/CvtAddr.h>
+#include <mactcp/TCPHi.h>
+
 #define MBEDTLS_ERR_NET_SOCKET_FAILED                     -0x0042  /**< Failed to open a socket. */
 #define MBEDTLS_ERR_NET_CONNECT_FAILED                    -0x0044  /**< The connection to the given server / port failed. */
 #define MBEDTLS_ERR_NET_BIND_FAILED                       -0x0046  /**< Binding of the socket failed. */
@@ -61,6 +64,8 @@ extern "C" {
 typedef struct
 {
 	unsigned long stream;
+	GiveTimePtr giveTime;
+	bool cancel;
 }
 mbedtls_net_context;
 
@@ -70,7 +75,7 @@ mbedtls_net_context;
  *
  * \param ctx      Context to initialize
  */
-void mbedtls_net_init( mbedtls_net_context *ctx );
+void mbedtls_net_init( mbedtls_net_context *ctx, GiveTimePtr giveTime);
 
 /**
  * \brief          Initiate a connection with host:port in the given protocol
@@ -87,7 +92,7 @@ void mbedtls_net_init( mbedtls_net_context *ctx );
  *
  * \note           Sets the socket in connected mode even with UDP.
  */
-int mbedtls_net_connect( mbedtls_net_context *ctx, const char *host, const char *port, int proto );
+int mbedtls_net_connect( mbedtls_net_context *ctx, const char *host, const char *port, int proto);
 
 /**
  * \brief          Create a receiving socket on bind_ip:port in the chosen
@@ -106,7 +111,7 @@ int mbedtls_net_connect( mbedtls_net_context *ctx, const char *host, const char 
  * \note           Regardless of the protocol, opens the sockets and binds it.
  *                 In addition, make the socket listening if protocol is TCP.
  */
-int mbedtls_net_bind( mbedtls_net_context *ctx, const char *bind_ip, const char *port, int proto );
+int mbedtls_net_bind( mbedtls_net_context *ctx, const char *bind_ip, const char *port, int proto);
 
 /**
  * \brief           Accept a connection from a remote client
@@ -167,7 +172,7 @@ void mbedtls_net_usleep( unsigned long usec );
  *                 or a non-zero error code; with a non-blocking socket,
  *                 MBEDTLS_ERR_SSL_WANT_READ indicates read() would block.
  */
-int mbedtls_net_recv( void *ctx, unsigned char *buf, size_t len );
+int mbedtls_net_recv( void *ctx, unsigned char *buf, size_t len);
 
 /**
  * \brief          Write at most 'len' characters. If no error occurs,
@@ -181,7 +186,7 @@ int mbedtls_net_recv( void *ctx, unsigned char *buf, size_t len );
  *                 or a non-zero error code; with a non-blocking socket,
  *                 MBEDTLS_ERR_SSL_WANT_WRITE indicates write() would block.
  */
-int mbedtls_net_send( void *ctx, const unsigned char *buf, size_t len );
+int mbedtls_net_send( void *ctx, const unsigned char *buf, size_t len);
 
 /**
  * \brief          Read at most 'len' characters, blocking for at most
@@ -205,14 +210,14 @@ int mbedtls_net_send( void *ctx, const unsigned char *buf, size_t len );
  *                 requires a different strategy.
  */
 int mbedtls_net_recv_timeout( void *ctx, unsigned char *buf, size_t len,
-                      uint32_t timeout );
+                      uint32_t timeout);
 
 /**
  * \brief          Gracefully shutdown the connection and free associated data
  *
  * \param ctx      The context to free
  */
-void mbedtls_net_free( mbedtls_net_context *ctx );
+void mbedtls_net_free( mbedtls_net_context *ctx);
 
 #ifdef __cplusplus
 }

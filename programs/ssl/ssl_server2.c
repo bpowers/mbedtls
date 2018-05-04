@@ -910,8 +910,8 @@ int main( int argc, char *argv[] )
     /*
      * Make sure memory references are valid in case we exit early.
      */
-    mbedtls_net_init( &client_fd );
-    mbedtls_net_init( &listen_fd );
+    mbedtls_net_init( &client_fd, NULL);
+    mbedtls_net_init( &listen_fd, NULL);
     mbedtls_ssl_init( &ssl );
     mbedtls_ssl_config_init( &conf );
     mbedtls_ctr_drbg_init( &ctr_drbg );

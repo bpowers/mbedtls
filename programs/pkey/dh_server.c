@@ -86,8 +86,8 @@ int main( void )
     mbedtls_dhm_context dhm;
     mbedtls_aes_context aes;
 
-    mbedtls_net_init( &listen_fd );
-    mbedtls_net_init( &client_fd );
+    mbedtls_net_init( &listen_fd, NULL);
+    mbedtls_net_init( &client_fd, NULL);
     mbedtls_rsa_init( &rsa, MBEDTLS_RSA_PKCS_V15, MBEDTLS_MD_SHA256 );
     mbedtls_dhm_init( &dhm );
     mbedtls_aes_init( &aes );
