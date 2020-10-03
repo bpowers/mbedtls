@@ -34,7 +34,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include <MacTCP.h>#include <mactcp/CvtAddr.h>
+#include <MacTCP.h>
+#include <mactcp/CvtAddr.h>
 #include <mactcp/TCPHi.h>
 
 #define MBEDTLS_ERR_NET_SOCKET_FAILED                     -0x0042  /**< Failed to open a socket. */
