@@ -48,6 +48,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #define MBEDTLS_ERR_NET_SOCKET_FAILED                     -0x0042  /**< Failed to open a socket. */
 #define MBEDTLS_ERR_NET_CONNECT_FAILED                    -0x0044  /**< The connection to the given server / port failed. */
@@ -84,7 +85,12 @@ extern "C" {
  */
 typedef struct mbedtls_net_context
 {
+#ifdef MBEDTLS_NET_MAC_SYSTEM_7
+    unsigned long stream;
+    bool cancel;
+#else
     int fd;             /**< The underlying file descriptor                 */
+#endif
 }
 mbedtls_net_context;
 

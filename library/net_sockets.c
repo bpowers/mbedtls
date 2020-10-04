@@ -27,6 +27,238 @@
 
 #if defined(MBEDTLS_NET_C)
 
+#if defined(MBEDTLS_NET_MAC_SYSTEM_7)
+
+#if defined(MBEDTLS_PLATFORM_C)
+#include "mbedtls/platform.h"
+#else
+#include <stdlib.h>
+#endif
+
+#include <Threads.h>
+#include <MacTCP.h>
+#include <mactcp/CvtAddr.h>
+#include <mactcp/TCPHi.h>
+
+#include "mbedtls/net_sockets.h"
+
+#define kBufSize	4096	/* Size for TCP stream buffer and receive buffer */
+#define kTimeOut	0		/* Timeout for TCP commands */
+
+static void GiveTime() {
+  YieldToAnyThread();
+}
+
+/*
+ * Prepare for using the sockets interface
+ */
+static int net_prepare( void )
+{
+  OSErr err;
+
+  err = InitNetwork();
+  if (err != noErr)
+  {
+    return err;
+  }
+
+  return( 0 );
+}
+
+/*
+ * Initialize a context
+ */
+void mbedtls_net_init( mbedtls_net_context *ctx )
+{
+  ctx->stream = 0;
+  ctx->cancel = 0;
+}
+
+/*
+ * Initiate a TCP connection with host:port and the given protocol
+ */
+int mbedtls_net_connect( mbedtls_net_context *ctx, const char *host,
+                         const char *port, int proto)
+{
+  OSErr err;
+  int ret;
+  unsigned long ipAddress;
+
+  (void)(proto); // Unused
+
+  if( ( ret = net_prepare() ) != 0 )
+    return( ret );
+
+  /* Do name resolution */
+  err = ConvertStringToAddr((char *)host, &ipAddress, GiveTime);
+  if (err != noErr)
+  {
+    return (MBEDTLS_ERR_NET_UNKNOWN_HOST);
+  }
+
+  /* Create the stream */
+  err = CreateStream(&(ctx->stream), kBufSize, GiveTime, &(ctx->cancel));
+  if (err != noErr)
+  {
+    return(MBEDTLS_ERR_NET_SOCKET_FAILED);
+  }
+
+  /* Open the connection */
+  err = OpenConnection(ctx->stream, ipAddress, atoi(port), kTimeOut, GiveTime, &(ctx->cancel));
+  if (err != noErr) {
+    return (MBEDTLS_ERR_NET_CONNECT_FAILED);
+  }
+
+  return( 0 );
+}
+
+/*
+ * Create a listening socket on bind_ip:port
+ */
+int mbedtls_net_bind( mbedtls_net_context *ctx, const char *bind_ip, const char *port, int proto)
+{
+  OSErr err;
+  int ret;
+  unsigned long ipAddress;
+  short remotePort;
+
+  (void)(proto); // Unused
+
+  if ((ret = net_prepare()) != 0)
+    return(ret);
+
+  remotePort = (short)atoi(port);
+
+  /* Do name resolution */
+  err = ConvertStringToAddr((char *)bind_ip, &ipAddress, GiveTime);
+  if (err != noErr)
+  {
+    return (MBEDTLS_ERR_NET_UNKNOWN_HOST);
+  }
+
+  /* Create the stream */
+  err = CreateStream(&(ctx->stream), kBufSize, GiveTime, &(ctx->cancel));
+  if (err != noErr)
+  {
+    return(MBEDTLS_ERR_NET_SOCKET_FAILED);
+  }
+
+  /* Open the connection */
+  err = WaitForConnection(ctx->stream, kTimeOut, atoi(port), (long *)&ipAddress, &remotePort, GiveTime, &(ctx->cancel));
+
+  if (err != noErr) {
+    return (MBEDTLS_ERR_NET_LISTEN_FAILED);
+  }
+
+  return(0);
+}
+
+/*
+ * Accept a connection from a remote client
+ */
+int mbedtls_net_accept( mbedtls_net_context *bind_ctx,
+                        mbedtls_net_context *client_ctx,
+                        void *client_ip, size_t buf_size, size_t *ip_len )
+{
+  // Not implemented
+  (void)(bind_ctx);
+  (void)(client_ctx);
+  (void)(client_ip);
+  (void)(buf_size);
+  (void)(ip_len);
+
+  return( 0 );
+}
+
+/*
+ * Set the socket blocking or non-blocking
+ */
+int mbedtls_net_set_block( mbedtls_net_context *ctx )
+{
+  // Not implemented
+  (void)(ctx);
+
+  return 0;
+}
+
+int mbedtls_net_set_nonblock( mbedtls_net_context *ctx )
+{
+  // Not implemented
+  (void)(ctx);
+
+  return 0;
+}
+
+/*
+ * Portable usleep helper
+ */
+void mbedtls_net_usleep( unsigned long usec )
+{
+  // Not implemented
+  (void)(usec);
+}
+
+/*
+ * Read at most 'len' characters
+ */
+int mbedtls_net_recv( void *ctx, unsigned char *buf, size_t len)
+{
+  OSErr err;
+  mbedtls_net_context* mbedCtx = ((mbedtls_net_context *)ctx);
+  unsigned long stream = mbedCtx->stream;
+  unsigned short dataLength = len;
+
+  err = RecvData(stream, (Ptr)buf, &dataLength, false, GiveTime, &(mbedCtx->cancel));
+
+  if (err != noErr) {
+    return(MBEDTLS_ERR_NET_RECV_FAILED);
+  }
+
+  return(dataLength);
+}
+
+/*
+ * Read at most 'len' characters, blocking for at most 'timeout' ms
+ */
+int mbedtls_net_recv_timeout( void *ctx, unsigned char *buf, size_t len,
+                              uint32_t timeout)
+{
+  // (timeout not implemented)
+  (void)(timeout);
+
+  /* This call will not block */
+  return( mbedtls_net_recv( ctx, buf, len) );
+}
+
+/*
+ * Write at most 'len' characters
+ */
+int mbedtls_net_send( void *ctx, const unsigned char *buf, size_t len)
+{
+  OSErr err;
+  mbedtls_net_context* mbedCtx = ((mbedtls_net_context *)ctx);
+  unsigned long stream = mbedCtx->stream;
+
+  err = SendData(stream, (Ptr)buf, len, false, GiveTime, &(mbedCtx->cancel));
+
+  if (err != noErr) {
+    return(MBEDTLS_ERR_NET_SEND_FAILED);
+  }
+
+  return(len);
+}
+
+/*
+ * Gracefully close the connection
+ */
+void mbedtls_net_free( mbedtls_net_context *ctx)
+{
+  CloseConnection(ctx->stream, GiveTime, &(ctx->cancel));
+  ReleaseStream(ctx->stream, GiveTime, &(ctx->cancel));
+}
+
+#else
+
 #if !defined(unix) && !defined(__unix__) && !defined(__unix) && \
     !defined(__APPLE__) && !defined(_WIN32) && !defined(__QNXNTO__) && \
     !defined(__HAIKU__) && !defined(__midipix__)
@@ -677,4 +909,5 @@ void mbedtls_net_free( mbedtls_net_context *ctx )
     ctx->fd = -1;
 }
 
+#endif /* !MBDEDTLS_NET_MAC_SYSTEM_7 */
 #endif /* MBEDTLS_NET_C */

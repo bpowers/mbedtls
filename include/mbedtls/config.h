@@ -2852,7 +2852,18 @@
  *
  * This module provides networking routines.
  */
-// #define MBEDTLS_NET_C
+#define MBEDTLS_NET_C
+
+/**
+ * \def MBEDTLS_NET_MAC_SYSTEM_7
+ *
+ * Enable the TCP and UDP over IPv6/IPv4 networking routines for System 7 (pre-OSX) Macs.
+ *
+ * Module:  library/net_sockets.c
+ *
+ * This module provides networking routines.
+ */
+#define MBEDTLS_NET_MAC_SYSTEM_7
 
 /**
  * \def MBEDTLS_OID_C
