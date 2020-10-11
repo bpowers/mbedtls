@@ -23,7 +23,7 @@ else()
     project("mbed TLS" C)
 endif()
 
-# SET(CMAKE_CXX_FLAGS "-Ofast")
+SET(CMAKE_CXX_FLAGS "-Ofast")
 
 # Set the project root directory.
 set(MBEDTLS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
