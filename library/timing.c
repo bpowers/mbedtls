@@ -30,7 +30,14 @@
 
 #include "mbedtls/timing.h"
 
-#if !defined(MBEDTLS_TIMING_ALT)
+#if defined(MBEDTLS_NET_MAC_SYSTEM_7)
+#include <OSUtils.h>
+unsigned long mbedtls_timing_hardclock() {
+  return TickCount();
+}
+#endif
+
+#if !defined(MBEDTLS_TIMING_ALT) && !defined(MBEDTLS_NET_MAC_SYSTEM_7)
 
 /*
 #if !defined(unix) && !defined(__unix__) && !defined(__unix) && \
