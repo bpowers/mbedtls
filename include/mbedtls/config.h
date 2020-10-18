@@ -2863,7 +2863,7 @@
  *
  * This module provides networking routines.
  */
-#define MBEDTLS_NET_MAC_SYSTEM_7
+// #define MBEDTLS_NET_MAC_SYSTEM_7
 
 /**
  * \def MBEDTLS_OID_C
@@ -3801,7 +3801,7 @@
  * fields of a mbedtls_ecdh_context structure directly. See also
  * MBEDTLS_ECDH_LEGACY_CONTEXT in include/mbedtls/ecdh.h.
  */
-#define MBEDTLS_ECDH_VARIANT_EVEREST_ENABLED
+// #define MBEDTLS_ECDH_VARIANT_EVEREST_ENABLED
 
 /* \} name SECTION: Customisation configuration options */
 
