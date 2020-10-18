@@ -55,3 +55,7 @@ massif-*
 /GTAGS
 /TAGS
 /tags
+
+# IntelliJ project and its default build directories
+/.idea
+/cmake-build*
