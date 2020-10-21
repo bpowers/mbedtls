@@ -6,7 +6,6 @@ list (APPEND everest_def)
 set(everest_src
   ${CMAKE_CURRENT_SOURCE_DIR}/library/everest.c
   ${CMAKE_CURRENT_SOURCE_DIR}/library/x25519.c
-  ${CMAKE_CURRENT_SOURCE_DIR}/library/Hacl_Curve25519_joined.c
 )
 
 list(APPEND everest_inc_public ${CMAKE_CURRENT_SOURCE_DIR}/include)
