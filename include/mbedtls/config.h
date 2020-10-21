@@ -3587,7 +3587,7 @@
  * Uncomment to set the maximum plaintext size of both
  * incoming and outgoing I/O buffers.
  */
-#define MBEDTLS_SSL_MAX_CONTENT_LEN             4096
+#define MBEDTLS_SSL_MAX_CONTENT_LEN             16384
 
 /** \def MBEDTLS_SSL_IN_CONTENT_LEN
  *
@@ -3801,7 +3801,7 @@
  * fields of a mbedtls_ecdh_context structure directly. See also
  * MBEDTLS_ECDH_LEGACY_CONTEXT in include/mbedtls/ecdh.h.
  */
-#define MBEDTLS_ECDH_VARIANT_EVEREST_ENABLED
+// #define MBEDTLS_ECDH_VARIANT_EVEREST_ENABLED
 
 /* \} name SECTION: Customisation configuration options */
 
