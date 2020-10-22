@@ -1162,7 +1162,7 @@ static void fe_tobytes(u8 s[32], const fe h)
 }
 
 // multiply a field element by a signed 32-bit integer
-static void fe_mul_small(fe h, const fe f, i32 g)
+static inline void fe_mul_small(fe h, const fe f, i32 g)
 {
     i64 t0 = f[0] * (i64) g;  i64 t1 = f[1] * (i64) g;
     i64 t2 = f[2] * (i64) g;  i64 t3 = f[3] * (i64) g;
@@ -1172,7 +1172,7 @@ static void fe_mul_small(fe h, const fe f, i32 g)
     FE_CARRY;
 }
 
-static void fe_mul(fe h, const fe f, const fe g)
+static inline void fe_mul(fe h, const fe f, const fe g)
 {
     // Everything is unrolled and put in temporary variables.
     // We could roll the loop, but that would make curve25519 twice as slow.
@@ -1210,7 +1210,7 @@ static void fe_mul(fe h, const fe f, const fe g)
 }
 
 // we could use fe_mul() for this, but this is significantly faster
-static void fe_sq(fe h, const fe f)
+static inline void fe_sq(fe h, const fe f)
 {
     i32 f0 = f[0]; i32 f1 = f[1]; i32 f2 = f[2]; i32 f3 = f[3]; i32 f4 = f[4];
     i32 f5 = f[5]; i32 f6 = f[6]; i32 f7 = f[7]; i32 f8 = f[8]; i32 f9 = f[9];
